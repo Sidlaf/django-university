@@ -1,7 +1,12 @@
-<h2>Удалить студента</h2>
-<p>Вы уверены, что хотите удалить студента "{{ object }}"?</p>
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">Удалить</button>
-    <a href="{% url 'index' %}">Отмена</a>
-</form>
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Вы уверены, что хотите удалить студента "{{ object.name }}"?</h2>
+    <form method="post" class="form">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-danger" value="Удалить">
+        <a href="{% url 'student_list' %}" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+{% endblock %}

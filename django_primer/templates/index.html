@@ -1,61 +1,39 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Система учета успеваемости</title>
-</head>
-<body>
-    <h1>Успеваемость студентов</h1>
+{% extends "base_generic.html" %}
 
-    <h2>Таблица оценок</h2>
-    <table>
+{% block content %}
+<div class="table-container">
+    <h2>Welcome to the Student Performance Tracking System</h2>
+    <div class="list-group mt-4">
+        <a href="{% url 'student_list' %}" class="list-group-item list-group-item-action">Manage Students</a>
+        <a href="{% url 'subject_list' %}" class="list-group-item list-group-item-action">Manage Subjects</a>
+        <a href="{% url 'score_list' %}" class="list-group-item list-group-item-action">Manage Scores</a>
+        <a href="{% url 'report' %}" class="list-group-item list-group-item-action">View Reports</a>
+    </div>
+</div>
+
+<div class="table-container mt-5">
+    <h1 style="text-align:center;">Успеваемость студентов</h1>
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>ФИО студента</th>
+                <th>#</th>
+                <th>ФИО</th>
                 {% for subject in subjects %}
-                    <th>{{ subject }}</th>
+                    <th>{{ subject.name }}</th>
                 {% endfor %}
-                <th>Средний балл</th>
             </tr>
         </thead>
         <tbody>
-            {% for student in student_statistics %}
+            {% for statistics in student_statistics %}
                 <tr>
-                    <td>{{ student.student.fio }}</td>
-                    {% for score in student.scores %}
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ statistics.student.name }}</td>
+                    {% for score in statistics.scores %}
                         <td>{{ score }}</td>
                     {% endfor %}
-                    <td>{{ student.average }}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
-
-    <h2>Статистика</h2>
-    <p>Лучший студент: {{ best_student }}</p>
-    <p>Худший студент: {{ worst_student }}</p>
-
-    <h2>Средние баллы по предметам</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Предмет</th>
-                <th>Средний балл</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for subject, average in subject_averages.items %}
-                <tr>
-                    <td>{{ subject }}</td>
-                    <td>{{ average|floatformat:1 }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <h2>Управление</h2>
-    <a href="{% url 'student_create' %}">Добавить студента</a><br>
-    <a href="{% url 'subject_create' %}">Добавить предмет</a><br>
-    <a href="{% url 'score_create' %}">Добавить оценку</a><br>
-
-</body>
-</html>
+</div>
+{% endblock %}

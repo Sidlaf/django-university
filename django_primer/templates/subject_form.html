@@ -1,6 +1,16 @@
-<h2>{% if object %}Редактировать предмет{% else %}Добавить предмет{% endif %}</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Сохранить</button>
-</form>
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="form-container">
+    <h2>{% if object %}Измнить{% else %}Создать{% endif %} предмет</h2>
+    <form method="post" class="form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_name">Название:</label>
+            <input type="text" class="form-control" id="id_name" name="name" value="{{ form.name.value|default_if_none:'' }}" required>
+        </div>
+        <button type="submit" class="btn btn-custom">Сохранить</button>
+        <button onclick="history.back()" class="btn btn-secondary">Отмена</button>
+    </form>
+</div>
+{% endblock %}

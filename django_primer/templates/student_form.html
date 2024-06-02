@@ -1,6 +1,22 @@
-<h2>{% if object %}Редактировать студента{% else %}Добавить студента{% endif %}</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Сохранить</button>
-</form>
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="form-container">
+    <h2>{% if object %}Измнить{% else %}Создать{% endif %} студента</h2>
+    <form method="post" class="form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_name">Имя:</label>
+            <input type="text" class="form-control" id="id_name" name="name"
+                value="{{ form.name.value|default_if_none:'' }}" required>
+        </div>
+        <div class="form-group">
+            <label for="id_birth_date">Дата рождения:</label>
+            <input type="date" class="form-control" id="id_birth_date" name="birth_date"
+                value="{{ form.birth_date.value|default_if_none:'' }}" required>
+        </div>
+        <button type="submit" class="btn btn-custom">Сохранить</button>
+        <button onclick="history.back()" class="btn btn-secondary">Отмена</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="table-container">
+    <a href="{% url 'index' %}" class="mb-3 custom-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left"
+            viewBox="0 0 20 20">
+            <path fill-rule="evenodd"
+                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+        </svg>
+        Назад
+    </a>
+    <h2>Оценки</h2>
+    <a href="{% url 'score_create' %}" class="btn btn-success mb-3">Поставить оценку</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Студент</th>
+                <th>Предмет</th>
+                <th>Оценка</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for score in object_list %}
+            <tr>
+                <td>{{ score.student.name }}</td>
+                <td>{{ score.subject.name }}</td>
+                <td>{{ score.value }}</td>
+                <td class="text-right">
+                    <a href="{% url 'score_update' score.id %}" class="btn btn-primary">Редактировать</a>
+                    <a href="{% url 'score_delete' score.id %}" class="btn btn-danger">Удалить</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

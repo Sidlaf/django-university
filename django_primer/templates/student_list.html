@@ -1,0 +1,37 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="table-container">
+    <a href="{% url 'index' %}" class="mb-3 custom-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left"
+            viewBox="0 0 20 20">
+            <path fill-rule="evenodd"
+                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+        </svg>
+        Назад
+    </a>
+    <h2>Студенты</h2>
+    <a href="{% url 'student_create' %}" class="btn btn-success mb-3">Создать</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Дата Рождения</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in object_list %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.birth_date|date:"Y-m-d" }}</td>
+                <td class="text-right">
+                    <a href="{% url 'student_update' student.id %}" class="btn btn-primary">Редактировать</a>
+                    <a href="{% url 'student_delete' student.id %}" class="btn btn-danger">Удалить</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

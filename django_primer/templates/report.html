@@ -1,0 +1,53 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Performance Report</h2>
+    
+    <div class="report-section mt-4">
+        <h3>Average Scores by Student</h3>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Student</th>
+                    <th>Average Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in student_averages %}
+                    <tr>
+                        <td>{{ student.student__name }}</td>
+                        <td>{{ student.average_score|floatformat:2 }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="report-section mt-4">
+        <h3>Average Scores by Subject</h3>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Subject</th>
+                    <th>Average Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for subject in subject_averages %}
+                    <tr>
+                        <td>{{ subject.subject__name }}</td>
+                        <td>{{ subject.average_score|floatformat:2 }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="report-section mt-4 mb-5">
+        <h3>Best and Worst Students</h3>
+        <p><strong>Best Student:</strong> {{ best_student.student__name }} with an average of {{ best_student.average_score|floatformat:2 }}</p>
+        <p><strong>Worst Student:</strong> {{ worst_student.student__name }} with an average of {{ worst_student.average_score|floatformat:2 }}</p>
+    </div>
+</div>
+{% endblock %}
