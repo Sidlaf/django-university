@@ -1,0 +1,7 @@
+<h2>Удалить студента</h2>
+<p>Вы уверены, что хотите удалить студента "{{ object }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Удалить</button>
+    <a href="{% url 'index' %}">Отмена</a>
+</form>
