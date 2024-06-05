@@ -24,9 +24,8 @@ ScoreUpdateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name='index'),
-    path('report/view/', ReportView.as_view(), name='report'),
 
-    path('score/list/', ScoreListView.as_view(), name='score_list'),
+    path('score/list/', ScoreListView.  as_view(), name='score_list'),
     path('score/form/', ScoreCreateView.as_view(), name='score_create'),
     path('score/<int:pk>/update/', ScoreUpdateView.as_view(), name='score_update'),
     path('score/<int:pk>/delete/', ScoreDeleteView.as_view(), name='score_delete'),
@@ -40,13 +39,6 @@ urlpatterns = [
     path('subject/form/', SubjectCreateView.as_view(), name='subject_create'),
     path('subject/<int:pk>/update/', SubjectUpdateView.as_view(), name='subject_update'),
     path('subject/<int:pk>/delete/', SubjectDeleteView.as_view(), name='subject_delete'),
-    # path('student/create/', views.StudentCreateView.as_view(), name='student_create'),
-    # path('student/<int:pk>/update/', views.StudentUpdateView.as_view(), name='student_update'),
-    # path('student/<int:pk>/delete/', views.StudentDeleteView.as_view(), name='student_delete'),
-    # path('subject/create/', views.SubjectCreateView.as_view(), name='subject_create'),
-    # path('subject/<int:pk>/update/', views.SubjectUpdateView.as_view(), name='subject_update'),
-    # path('subject/<int:pk>/delete/', views.SubjectDeleteView.as_view(), name='subject_delete'),
-    # path('score/create/', views.ScoreCreateView.as_view(), name='score_create'),
-    # path('score/<int:pk>/update/', views.ScoreUpdateView.as_view(), name='score_update'),
-    # path('score/<int:pk>/delete/', views.ScoreDeleteView.as_view(), name='score_delete'),
+
+    path('report/', ReportView.as_view(), name='report')
 ]

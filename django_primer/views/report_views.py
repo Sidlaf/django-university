@@ -9,7 +9,7 @@ class ReportView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        # Calculate averages for each student
+        # Средний балл каждого студента
         student_averages = list(
         Score.objects.annotate(
             student_name=Case(
@@ -25,14 +25,14 @@ class ReportView(TemplateView):
                 .order_by('-average_score')
             )
         
-        # Calculate averages for each subject
+        # Средний балл по предметам
         subject_averages = list(
             Score.objects.values('subject__name')
             .annotate(average_score=Avg('value'))
             .order_by('-average_score')
         )
         
-        # Safely assign best and worst student based on average score
+        # Распределение лучшего и худшего студента на основе среднего балла
         if student_averages:
             context['student_averages'] = student_averages
             context['best_student'] = student_averages[0]
