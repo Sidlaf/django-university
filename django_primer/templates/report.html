@@ -12,14 +12,14 @@
             Назад
         </a>
         <h2>Отчет об успеваемости</h2>
-
-        <div class="report-section mt-4">
+        <a href="{% url 'score_create' %}" class="btn btn-success mb-3">Скачать отчёт</a>
+        <div class="report-section ">
             <h3 class="text-center">Средний балл по каждому студенту</h3>
-            <table class="table table-hover mt-4">
+            <table class="table table-bordered table-hover mt-4">
                 <thead>
                     <tr>
                         <th>№</th>
-                        <th>ФИО</th>
+                        <th>ФИО студента</th>
                         <th>Средний балл</th>
                     </tr>
                 </thead>
@@ -27,7 +27,7 @@
                     {% for student in student_averages %}
                     <tr>
                         <th scope="row">{{ forloop.counter }}</th>
-                        <td>{{ student.student__name }}</td>
+                        <td>{{ student.student_name }}</td>
                         <td>{{ student.average_score|floatformat:2 }}</td>
                     </tr>
                     {% endfor %}
@@ -37,11 +37,11 @@
 
         <div class="report-section mt-4">
             <h3 class="text-center">Средние баллы по предметам</h3>
-            <table class="table mt-4 table-hover">
+            <table class="table table-bordered  mt-4 table-hover">
                 <thead>
                     <tr>
                         <th>№</th>
-                        <th>Название</th>
+                        <th>Название предмета</th>
                         <th>Средний балл</th>
                     </tr>
                 </thead>
@@ -61,11 +61,13 @@
             <h3 class="text-center">Лучший и xудший студенты</h3>
             <div class="row mt-4">
                 <div class="col-md-6">
-                    <p class="text-center"><strong>Лучший студент:</strong> {{ best_student.student__name }} со средним
+                    <p><strong>Лучший студент:</strong></p>
+                    <p>{{ best_student.student_name }} со средним
                         баллом {{ best_student.average_score|floatformat:2 }}</p>
                 </div>
                 <div class="col-md-6">
-                    <p class="text-center"><strong>Худший студент:</strong> {{ worst_student.student__name }} со средним
+                    <p><strong>Худший студент:</strong></p>
+                    <p> {{ worst_student.student_name }} со средним
                         баллом {{ worst_student.average_score|floatformat:2 }}</p>
                 </div>
             </div>

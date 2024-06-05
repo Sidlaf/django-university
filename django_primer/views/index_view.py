@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.db.models import Avg
 from django.views.generic import TemplateView
 from ..models import Student, Subject, Score
 
@@ -15,8 +15,8 @@ class IndexView(TemplateView):
         for student in students:
             scores = []
             for subject in subjects:
-                score = Score.objects.filter(student=student, subject=subject).first()
-                scores.append(score.value if score else '-')
+                score = Score.objects.filter(student=student, subject=subject).aggregate(average_score=Avg('value'))['average_score']
+                scores.append(score if score else '-')
             student_statistics.append({
                 'student': student,
                 'scores': scores

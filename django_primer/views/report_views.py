@@ -1,4 +1,5 @@
-from django.db.models import Avg
+from django.db.models import Avg, F, Value, Case, When
+from django.db.models.functions import Concat
 from django.views.generic import TemplateView
 from ..models import Score
 
@@ -10,10 +11,19 @@ class ReportView(TemplateView):
         
         # Calculate averages for each student
         student_averages = list(
-            Score.objects.values('student__name')
-            .annotate(average_score=Avg('value'))
-            .order_by('-average_score')
+        Score.objects.annotate(
+            student_name=Case(
+                When(
+                    student__patronymic__isnull=True,
+                    then=Concat(F('student__last_name'), Value(' '), F('student__first_name'))
+                    ),            
+                default=Concat(F('student__last_name'), Value(' '), F('student__first_name'), Value(' '), F('student__patronymic'))
+            )
         )
+        .values('student_name') 
+                .annotate(average_score=Avg('value'))
+                .order_by('-average_score')
+            )
         
         # Calculate averages for each subject
         subject_averages = list(

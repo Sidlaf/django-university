@@ -10,13 +10,13 @@ class StudentListView(ListView):
 class StudentCreateView(CreateView):
     model = Student
     template_name = 'student_form.html'
-    fields = ['name', 'birth_date']
+    fields = ['last_name', 'first_name','patronymic','birth_date','email']
     success_url = reverse_lazy('student_list')
 
 class StudentUpdateView(UpdateView):
     model = Student
     template_name = 'student_form.html'
-    fields = ['name', 'birth_date']
+    fields = ['last_name', 'first_name','patronymic','birth_date','email']
     widgets = {
     'birth_date': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
 }

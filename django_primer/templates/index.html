@@ -15,11 +15,12 @@
     <div class="col-md-9">
         <div class="table-container">
             <h2 class="text-center">Успеваемость студентов</h2>
-            <table class="table table-hover">
+            <a href="{% url 'score_create' %}" class="btn btn-success mb-3">Скачать</a>
+            <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>№</th>
-                        <th>ФИО</th>
+                        <th>ФИО студента</th>
                         {% for subject in subjects %}
                         <th>{{ subject.name }}</th>
                         {% endfor %}
