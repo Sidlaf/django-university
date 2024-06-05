@@ -2,33 +2,32 @@
 
 {% block content %}
 <div class="form-container">
-    <h2>{% if object %}Edit{% else %}Add{% endif %} Score</h2>
+    <h2>{% if object %}Изменить{% else %}Добавить{% endif %} Оценку</h2>
     <form method="post" class="form">
         {% csrf_token %}
         <div class="form-group">
-            <label for="id_student">Student:</label>
+            <label for="id_student">Студент:</label>
             <select id="id_student" name="student" class="form-control">
                 {% for student in form.fields.student.queryset %}
-                <option value="{{ student.id }}" {% if form.student.value==student.id %}selected{% endif %}>{{
-                    student.name }}</option>
+                <option value="{{ student.id }}">{{student.name }}</option>
                 {% endfor %}
             </select>
         </div>
         <div class="form-group">
-            <label for="id_subject">Subject:</label>
+            <label for="id_subject">Предмет:</label>
             <select id="id_subject" name="subject" class="form-control">
                 {% for subject in form.fields.subject.queryset %}
-                <option value="{{ subject.id }}" {% if form.subject.value==subject.id %}selected{% endif %}>{{
-                    subject.name }}</option>
+                <option value="{{ subject.id }}">{{subject.name }}</option>
                 {% endfor %}
             </select>
         </div>
         <div class="form-group">
-            <label for="id_value">Score:</label>
-            <input type="number" class="form-control" id="id_value" name="value" min="0" max="100"
+            <label for="id_value">Оценка:</label>
+            <input type="number" class="form-control" id="id_value" name="value" min="1" max="5"
                 value="{{ form.value.value|default_if_none:'' }}" required>
         </div>
         <button type="submit" class="btn btn-custom">Сохранить</button>
+        <button type="button" onclick="history.back()" class="btn btn-secondary">Отмена</button>
     </form>
 </div>
 {% endblock %}

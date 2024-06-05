@@ -4,13 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Performance Tracking System</title>
+    <title>Система учета успеваемости студентов</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body {
-            padding-top: 20px;
-        }
-
         .container {
             width: 80%;
             margin: auto;
@@ -34,14 +30,23 @@
         }
 
         .header {
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #e2e2e2;
+            background: linear-gradient(90deg, #034993, #007bff 72.23%);
             padding-bottom: 10px;
-            margin-bottom: 20px;
+
         }
 
         .header h1 {
+            font-family: Montserrat;
             padding: 20px 0;
+            color: #fff;
+            font-weight: 600;
+            font-size: 36px;
+            line-height: 51px;
+            color: #fff;
+        }
+
+        .header a {
+            text-decoration: none;
         }
 
         .form-container {
@@ -58,12 +63,16 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
+        .content {
+            padding: 20px;
+            min-height: calc(100vh - 200px);
+
+        }
+
         .custom-link {
             color: black;
             text-decoration: none;
-            /* Убрать подчеркивание */
             margin-bottom: 30px;
-            /* Отступ снизу 40px */
             display: inline-block;
         }
 
@@ -76,16 +85,20 @@
 <body>
     <div class="header">
         <div class="container">
-            <h1>Student Performance Tracking System</h1>
+            <a href="{% url 'index' %}">
+                <h1>Система учета успеваемости студентов</h1>
+            </a>
         </div>
     </div>
-    <div class="container">
-        {% block content %}
-        {% endblock %}
+    <div class="content">
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
     </div>
     <div class="footer">
         <div class="container">
-            &copy; 2024 Student Performance Tracking System. All rights reserved.
+            &copy; 2024 Сидоров Владислав Владимирович. Все права защищены.
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

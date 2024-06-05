@@ -13,7 +13,7 @@
         <div class="form-group">
             <label for="id_birth_date">Дата рождения:</label>
             <input type="date" class="form-control" id="id_birth_date" name="birth_date"
-                value="{{ form.birth_date.value|default_if_none:'' }}" required>
+                value="{{ form.birth_date.value|date:'Y-m-d'|default_if_none:'' }}" required>
         </div>
         <button type="submit" class="btn btn-custom">Сохранить</button>
         <button onclick="history.back()" class="btn btn-secondary">Отмена</button>
